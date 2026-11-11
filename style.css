@@ -150,3 +150,20 @@ section .sub { color: var(--muted); margin-bottom: 28px; }
 /* ---------- CARDS & GRID ---------- */
 .card {
   background:
+     /* ---------- CALCULATOR FIELD WITH IMAGE ---------- */
+.field {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+.field img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 18px;
+}
+.field-body { flex: 1; }
