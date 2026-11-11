@@ -1,1 +1,152 @@
+/* ==========================================
+   EcoPulse - style.css
+   ========================================== */
 
+:root {
+  --green: #1f9d55;
+  --green-dark: #0f6b38;
+  --green-light: #e6f6ec;
+  --bg: #f6faf7;
+  --card: #ffffff;
+  --text: #1d2b24;
+  --muted: #61736a;
+  --border: #dbe7df;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ---------- NAVBAR ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.logo { font-size: 1.5rem; font-weight: 800; color: var(--green-dark); }
+.logo span { color: var(--green); }
+.nav ul { display: flex; gap: 18px; }
+.nav ul a { font-weight: 600; font-size: 0.92rem; color: var(--muted); transition: color .2s; }
+.nav ul a:hover { color: var(--green); }
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--green-dark);
+  cursor: pointer;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  background: #fff;
+  color: var(--green-dark);
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: transform .15s, box-shadow .15s;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, .18); }
+.btn.primary { background: var(--green); color: #fff; }
+.btn.ghost { background: transparent; color: var(--green-dark); border: 2px solid var(--green); }
+
+/* ---------- HERO ---------- */
+.hero {
+  background: linear-gradient(135deg, #0f6b38, #1f9d55 60%, #5cc98a);
+  color: #fff;
+  padding: 70px 20px 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-text { max-width: 520px; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.2; margin-bottom: 14px; }
+.hero p { font-size: 1.1rem; opacity: 0.95; margin-bottom: 26px; }
+.hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero .btn.ghost { color: #fff; border-color: #fff; }
+.hero-image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .25);
+}
+
+/* ---------- STATS ---------- */
+.stats {
+  max-width: 900px;
+  margin: -45px auto 0;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+.stat {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 6px 24px rgba(15, 107, 56, .12);
+}
+.stat b { display: block; font-size: 1.8rem; color: var(--green); }
+.stat small { color: var(--muted); }
+
+/* ---------- SECTIONS ---------- */
+section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 70px 20px 10px;
+}
+section h2 { font-size: 1.9rem; margin-bottom: 6px; color: var(--green-dark); }
+section .sub { color: var(--muted); margin-bottom: 28px; }
+
+.section-img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+.about-img {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* ---------- CARDS & GRID ---------- */
+.card {
+  background:
