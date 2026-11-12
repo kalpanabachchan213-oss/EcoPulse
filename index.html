@@ -1,1 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoPulse – Track Your Carbon Footprint</title>
+  <meta name="description" content="EcoPulse helps you calculate your carbon footprint, build daily eco habits, take a 30-day green challenge, earn badges and share your eco score.">
+  <meta name="theme-color" content="#16a34a">
+  <meta property="og:title" content="EcoPulse – Feel the pulse of your planet">
+  <meta property="og:description" content="Calculate your carbon footprint, build green habits and earn your eco score.">
+  <meta property="og:image" content="green%20Earth.jpg">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <canvas id="confetti"></canvas>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <!-- ============ NAVBAR ============ -->
+  <header class="nav" id="nav">
+    <a href="#home" class="brand"><img src="logo.png" alt="EcoPulse logo"><span>Eco<b>Pulse</b></span></a>
+    <nav id="navLinks" aria-label="Main">
+      <a href="#features">Features</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#habits">Habits</a>
+      <a href="#ecoscore">Score</a>
+      <a href="#analytics">Analytics</a>
+      <a href="#challenge">Challenge</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#assistant">Assistant</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="blob b1"></div><div class="blob b2"></div>
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <span class="eyebrow">🌿 Your personal climate companion</span>
+          <h1>Feel the <span class="grad">pulse</span> of your planet</h1>
+          <p>EcoPulse is a free, friendly tool that shows how much CO₂ your daily life creates, then helps you shrink it with tiny daily habits. As your score improves, the Earth on this page turns greener 💚</p>
+          <div class="btn-row">
+            <a href="#calculator" class="btn primary">Calculate My Footprint</a>
+            <a href="#habits" class="btn ghost">Start Daily Habits</a>
+          </div>
+          <a href="#how" class="soft-link">New here? See how it works ↓</a>
+          <div class="stats">
+            <div class="stat"><b id="statTrees" data-v="0">0</b><span>Trees needed / year</span></div>
+            <div class="stat"><b id="statPoints" data-v="0">0</b><span>Eco points today</span></div>
+            <div class="stat"><b id="statStreak" data-v="0">0</b><span>Day streak 🔥</span></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="earth-wrap" id="earthWrap">
+            <div class="orbit"></div>
+            <img id="earthImg" src="green%20Earth.jpg" alt="Earth that changes with your eco score">
+            <div class="earth-fallback">🌍</div>
+            <div class="earth-badge"><span id="earthLabel">Earth Health: --</span><i id="earthPct">--%</i></div>
+            <div class="mascot" aria-hidden="true"><span class="bubble">Hi! I'm Ecco 🐢<br>Let's make Earth smile!</span><span class="face">🐢</span></div>
+          </div>
+          <p class="earth-hint">The Earth reacts to your score. Calculate &amp; tick habits to heal it 💚</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TRUST STRIP ============ -->
+    <div class="trust container reveal">
+      <span>✅ 100% free</span>
+      <span>🔒 No login · data stays in your browser</span>
+      <span>🇮🇳 India-friendly numbers</span>
+      <span>📱 Works great on phone</span>
+    </div>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section id="how" class="section">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Super simple</span><h2>How <span class="grad">EcoPulse</span> works</h2><p>Three easy steps. No science degree needed 😄</p></div>
+        <div class="steps">
+          <div class="step card reveal"><div class="step-no">1</div><div class="step-ico">🧮</div><h3>Calculate</h3><p>Tell us roughly how you travel, how much electricity and LPG you use, what you eat and how you handle waste. We turn it into kg of CO₂ per month.</p></div>
+          <div class="step card reveal"><div class="step-no">2</div><div class="step-ico">✅</div><h3>Build habits</h3><p>Every day, tick the green things you actually did. You collect points, keep a streak and unlock badges as you go.</p></div>
+          <div class="step card reveal"><div class="step-no">3</div><div class="step-ico">🌍</div><h3>Heal the Earth</h3><p>Your eco score goes up, the Earth on top of this page turns greener, and you can share your score card with friends.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FACTS ============ -->
+    <section id="facts" class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Why it matters</span><h2>Numbers that make you <span class="grad">think</span></h2><p>Approximate figures, just to give you a feel for the scale.</p></div>
+        <div class="facts">
+          <div class="fact card reveal"><b>~1.9 t</b><span>CO₂ per year for an average person in India (about 160 kg a month)</span></div>
+          <div class="fact card reveal"><b>~4.7 t</b><span>CO₂ per year for the average person worldwide (about 400 kg a month)</span></div>
+          <div class="fact card reveal"><b>~20 kg</b><span>CO₂ that one growing tree can absorb in a year</span></div>
+          <div class="fact card reveal"><b>up to 80%</b><span>less energy used by an LED bulb compared with an old bulb</span></div>
+        </div>
+        <p class="note reveal">Small daily choices, repeated by millions of people, add up to a big difference. 🌱</p>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">What you can do</span><h2>Everything you need to live <span class="grad">greener</span></h2><p>Six simple tools, one friendly place.</p></div>
+        <div class="grid feat-grid">
+          <a href="#calculator" class="card feat reveal"><img src="carbonfoot.jpg" alt="Carbon footprint" loading="lazy"><div><h3>Carbon Footprint</h3><p>Find out how much CO₂ your travel, electricity, LPG, food and waste create each month.</p><span class="more">Try it →</span></div></a>
+          <a href="#habits" class="card feat reveal"><img src="dailyactivety.jpg" alt="Daily activity" loading="lazy"><div><h3>Daily Habits</h3><p>Tick eco-friendly habits, earn points and build a fiery streak.</p><span class="more">Track now →</span></div></a>
+          <a href="#ecoscore" class="card feat reveal"><img src="ecoscore.jpg" alt="Eco score" loading="lazy"><div><h3>Eco Score</h3><p>One number out of 100 that shows how green your lifestyle really is.</p><span class="more">See score →</span></div></a>
+          <a href="#analytics" class="card feat reveal"><img src="eviranaltics.jpg" alt="Environmental analytics" loading="lazy"><div><h3>Analytics</h3><p>Charts of where your emissions come from and how you compare.</p><span class="more">View charts →</span></div></a>
+          <a href="#rewards" class="card feat reveal"><img src="greenreward.jpg" alt="Green rewards" loading="lazy"><div><h3>Green Rewards</h3><p>Unlock badges and levels for every eco action you complete.</p><span class="more">Get rewards →</span></div></a>
+          <a href="#assistant" class="card feat reveal"><img src="ecoasstant.jpg" alt="Eco assistant" loading="lazy"><div><h3>Eco Assistant</h3><p>Ask quick questions and get simple, India-friendly eco tips.</p><span class="more">Ask now →</span></div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CALCULATOR ============ -->
+    <section id="calculator" class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Step 1</span><h2>Carbon Footprint <span class="grad">Calculator</span></h2><p>Enter your monthly lifestyle details. Values are approximate estimates for awareness.</p></div>
+        <div class="hint reveal">💡 <b>Not sure what to enter?</b> Check your electricity bill for kWh, and think of an average day for kilometres. Rough numbers are totally fine!</div>
+
+        <div class="calc-grid">
+          <form id="calcForm" class="card calc-form reveal" novalidate>
+            <div class="inputs">
+              <label class="input-card"><img src="personal-transport.jpg" alt="" loading="lazy"><span>Car / bike travel</span><small>km per day</small><input type="number" id="car" min="0" step="0.5" placeholder="e.g. 10" inputmode="decimal"></label>
+              <label class="input-card"><img src="public-tranport.jpg" alt="" loading="lazy"><span>Bus / metro / train</span><small>km per day</small><input type="number" id="pub" min="0" step="0.5" placeholder="e.g. 8" inputmode="decimal"></label>
+              <label class="input-card"><img src="electricity.jpg" alt="" loading="lazy"><span>Electricity used</span><small>kWh per month</small><input type="number" id="elec" min="0" step="1" placeholder="e.g. 150" inputmode="decimal"></label>
+              <label class="input-card"><img src="lpg-gas.png" alt="" loading="lazy"><span>LPG cylinders</span><small>per month</small><input type="number" id="lpg" min="0" step="0.1" placeholder="e.g. 1" inputmode="decimal"></label>
+              <label class="input-card"><img src="diet.jpg" alt="" loading="lazy"><span>Diet type</span><small>what you usually eat</small>
+                <select id="diet">
+                  <option value="veg">Vegetarian</option>
+                  <option value="vegdairy">Vegetarian (eggs / dairy heavy)</option>
+                  <option value="occ" selected>Occasional non-veg</option>
+                  <option value="nonveg">Daily non-veg</option>
+                </select></label>
+              <label class="input-card"><img src="waste.jpg" alt="" loading="lazy"><span>Waste you recycle</span><small>how much of it</small>
+                <select id="waste">
+                  <option value="most">Most of it</option>
+                  <option value="some" selected>Some of it</option>
+                  <option value="none">Almost none</option>
+                </select></label>
+            </div>
+            <div class="btn-row">
+              <button type="submit" class="btn primary">Calculate</button>
+              <button type="button" class="btn ghost" id="resetCalc">Reset</button>
+            </div>
+          </form>
+
+          <aside class="card result reveal" id="resultCard" aria-live="polite">
+            <div id="resultEmpty" class="empty"><div class="big">🌱</div><p>Fill in the details and hit <b>Calculate</b> to see your results here.</p></div>
+            <div id="resultBox" hidden>
+              <div class="res-top"><div><span class="muted">Your monthly footprint</span><div class="res-num"><b id="resNum">0</b><small>kg CO₂ / month</small></div></div><div class="pill" id="resVerdict">--</div></div>
+              <div class="bars" id="bars"></div>
+              <div class="equiv" id="equiv"></div>
+            </div>
+          </aside>
+        </div>
+
+        <details class="method reveal">
+          <summary>🔎 How is this calculated? (tap to see)</summary>
+          <ul>
+            <li>🚗 Car / bike: about <b>0.12 kg CO₂ per km</b></li>
+            <li>🚌 Bus / metro / train: about <b>0.04 kg CO₂ per km</b></li>
+            <li>💡 Electricity: about <b>0.82 kg CO₂ per kWh</b> (typical India grid)</li>
+            <li>🔥 LPG: about <b>42 kg CO₂ per 14.2 kg cylinder</b></li>
+            <li>🍽️ Diet: roughly <b>36 to 99 kg CO₂ per month</b>, from vegetarian to daily non-veg</li>
+            <li>🗑️ Waste: roughly <b>5 to 22 kg CO₂ per month</b>, depending on how much you recycle</li>
+          </ul>
+          <p>These are rounded averages, so your real footprint may differ a little. The goal is awareness, not lab accuracy.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ HABITS ============ -->
+    <section id="habits" class="section">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Step 2</span><h2>Daily Eco <span class="grad">Habits</span></h2><p>Tick what you did today. Progress is saved in your browser.</p></div>
+        <div class="hint reveal">✨ <b>Be honest, be proud.</b> Tick only what you really did today. Come back tomorrow to grow your streak. Points reset every day, your streak and badges stay.</div>
+        <div class="habit-grid">
+          <div class="card habit-side reveal">
+            <img src="dailyactivety.jpg" alt="Daily eco activities" loading="lazy">
+            <div class="mini-stats">
+              <div><b id="habitPoints">0</b><span>Points today</span></div>
+              <div><b id="habitStreak">0</b><span>Streak 🔥</span></div>
+            </div>
+            <div class="progress-label"><span>Today's progress</span><b id="habitPct">0%</b></div>
+            <div class="bar"><i id="habitBar"></i></div>
+          </div>
+          <ul class="habit-list reveal" id="habitList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ECO SCORE ============ -->
+    <section id="ecoscore" class="section alt">
+      <div class="container score-grid">
+        <div class="reveal score-ring-wrap">
+          <svg viewBox="0 0 120 120" class="ring" aria-hidden="true">
+            <defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#84cc16"/><stop offset="1" stop-color="#0d9488"/></linearGradient></defs>
+            <circle cx="60" cy="60" r="52" class="ring-bg"/>
+            <circle cx="60" cy="60" r="52" class="ring-fg" id="ringFg"/>
+          </svg>
+          <div class="ring-center"><b id="scoreNum">--</b><span>/ 100</span></div>
+        </div>
+        <div class="reveal">
+          <span class="eyebrow">Step 3</span>
+          <h2>Your Eco <span class="grad">Score</span></h2>
+          <h3 id="scoreTitle">Calculate your footprint to see your score</h3>
+          <p id="scoreText">Your eco score improves when your monthly CO₂ is low and you complete more eco habits every day.</p>
+          <div class="hint">🧠 <b>How the score works:</b> 70% comes from your monthly footprint (lower is better) and 30% from the habits you completed today.</div>
+          <div class="btn-row"><a href="#calculator" class="btn primary">Calculate now</a><button class="btn ghost" id="openShare">📤 Share my score</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ANALYTICS ============ -->
+    <section id="analytics" class="section">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Insights</span><h2>Environmental <span class="grad">Analytics</span></h2><p>Understand where your emissions come from and how you compare. The biggest slice is your best place to start!</p></div>
+        <div class="grid two">
+          <div class="card chart-card reveal"><h3>Emission breakdown</h3><div class="chart-box"><canvas id="donutChart"></canvas><p class="chart-empty" id="donutEmpty">Calculate your footprint to see this chart.</p></div></div>
+          <div class="card chart-card reveal"><h3>Eco points – last 7 days</h3><div class="chart-box"><canvas id="weekChart"></canvas></div></div>
+        </div>
+        <div class="card compare reveal">
+          <h3>How do you compare? <small>(kg CO₂ per person per month, approx.)</small></h3>
+          <div id="cmpBars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHAT IF ============ -->
+    <section id="whatif" class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Play with it</span><h2>What if I <span class="grad">changed</span>?</h2><p>Move the sliders and see how much CO₂ you could save every month. Nothing gets saved, so play freely 🎮</p></div>
+        <div class="whatif card reveal">
+          <div class="sliders">
+            <label>🚇 Replace car/bike with metro/bus: <b id="wiCarV">0</b> km/day<input type="range" id="wiCar" min="0" max="30" step="1" value="0"></label>
+            <label>💡 Use less electricity: <b id="wiElecV">0</b>%<input type="range" id="wiElec" min="0" max="50" step="5" value="0"></label>
+            <label>🥗 Meat-free days per week: <b id="wiVegV">0</b><input type="range" id="wiVeg" min="0" max="7" step="1" value="0"></label>
+          </div>
+          <div class="wi-out">
+            <span class="muted">You could save</span>
+            <div class="res-num"><b id="wiSave">0</b><small>kg CO₂ / month</small></div>
+            <p id="wiText">Move a slider to begin 👆</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 30 DAY CHALLENGE ============ -->
+    <section id="challenge" class="section">
+      <div class="container">
+        <div class="challenge card reveal">
+          <div class="ch-img"><img src="30daychallenge.jpg" alt="30 day eco challenge" loading="lazy"></div>
+          <div class="ch-body">
+            <span class="eyebrow">Build a lifelong habit</span>
+            <h2>30-Day Eco <span class="grad">Challenge</span></h2>
+            <p>One small green mission for each of 30 days. <b>Tap a day once</b> to read its mission, <b>tap again</b> to mark it done.</p>
+            <div class="progress-label"><span id="chText">0 / 30 days completed</span><b id="chPct">0%</b></div>
+            <div class="bar"><i id="chBar"></i></div>
+            <div class="day-grid" id="dayGrid"></div>
+            <div class="task-box" id="taskBox">👆 Tap a day to see today's mission.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REWARDS ============ -->
+    <section id="rewards" class="section alt">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Keep going</span><h2>Green <span class="grad">Rewards</span> 🏆</h2><p>Keep up your habits and unlock badges. Every point also levels you up from a tiny Seed to a Forest Guardian.</p></div>
+        <div class="grid rewards-grid">
+          <div class="card level reveal">
+            <img src="greenreward.jpg" alt="Green rewards" loading="lazy">
+            <span class="muted">Your level</span>
+            <h3 id="levelName">🌰 Seed</h3>
+            <div class="bar"><i id="levelBar"></i></div>
+            <small id="levelText">0 points</small>
+          </div>
+          <div class="badges reveal" id="badgeGrid">
+            <div class="badge" data-id="seedling"><span>🌱</span><b>Seedling</b><small>Complete your first habit</small></div>
+            <div class="badge" data-id="starter"><span>🌿</span><b>Green Starter</b><small>3 day streak</small></div>
+            <div class="badge" data-id="hugger"><span>🌳</span><b>Tree Hugger</b><small>7 day streak</small></div>
+            <div class="badge" data-id="hero"><span>🌍</span><b>Planet Hero</b><small>30 day streak</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GO ELECTRIC ============ -->
+    <section id="electric" class="section">
+      <div class="container ev card reveal">
+        <img src="electrical-%20car.jpg" alt="Electric car" loading="lazy">
+        <div>
+          <span class="eyebrow">Transport matters</span>
+          <h2>Go Electric, Go <span class="grad">Green</span> 🚗⚡</h2>
+          <p>Transport is one of the biggest sources of personal emissions. Electric vehicles have no tailpipe emissions and are cheaper to run. Even switching a few trips a week to public transport, cycling or carpooling makes a visible difference.</p>
+          <ul class="ticks"><li>No tailpipe smoke in your city</li><li>Lower running cost per km</li><li>Even better when charged with solar ☀️</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIPS ============ -->
+    <section id="tips" class="section alt tips-sec">
+      <div class="container">
+        <div class="head reveal"><span class="eyebrow">Small changes</span><h2>Quick Eco <span class="grad">Tips</span></h2><p>Small changes that make a real difference.</p></div>
+        <div class="grid tips-grid">
+          <article class="card tip reveal"><img src="savewater.jpg" alt="Save water" loading="lazy"><div><h3>💧 Save water</h3><p>Fix leaking taps and switch off the tap while brushing.</p></div></article>
+          <article class="card tip reveal"><img src="solar.jpg" alt="Solar energy" loading="lazy"><div><h3>☀️ Go solar</h3><p>A rooftop solar panel can cut your electricity bill and your CO₂.</p></div></article>
+          <article class="card tip reveal"><img src="renewable.jpg" alt="Renewable energy" loading="lazy"><div><h3>🌬️ Choose renewables</h3><p>Pick green energy plans and efficient (5-star) appliances.</p></div></article>
+          <article class="card tip reveal"><img src="plant-tree.jpg" alt="Plant a tree" loading="lazy"><div><h3>🌱 Plant a tree</h3><p>One tree absorbs roughly 20 kg of CO₂ every year.</p></div></article>
+          <article class="card tip reveal"><img src="waste.jpg" alt="Segregate waste" loading="lazy"><div><h3>♻️ Segregate waste</h3><p>Separate wet and dry waste so more of it can be recycled.</p></div></article>
+          <article class="card tip reveal"><img src="protect.jpg" alt="Protect nature" loading="lazy"><div><h3>🛡️ Protect nature</h3><p>Avoid single-use plastic and keep parks and rivers clean.</p></div></article>
+        </div>
+        <div class="banner reveal">
+          <img src="greenarytips.png" alt="Greenery tips" loading="lazy">
+          <div><h3>Did you know? 💡</h3><p>LED bulbs use up to 80% less energy than old bulbs, and unplugging idle chargers stops "phantom" power use. Small things add up!</p></div>
+          <img src="savemwater2.jpg" alt="Save water poster" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ASSISTANT ============ -->
+    <section id="assistant" class="section">
+      <div class="container assist-grid">
+        <div class="reveal assist-intro">
+          <span class="eyebrow">Ask anything</span>
+          <h2>Eco <span class="grad">Assistant</span> 🤖</h2>
+          <p>Ask a quick question and get an eco tip. Try one of these:</p>
+          <div class="chips" id="chips">
+            <button type="button" data-q="How to save electricity?">⚡ Save electricity</button>
+            <button type="button" data-q="How to save water?">💧 Save water</button>
+            <button type="button" data-q="How to reduce waste?">♻️ Reduce waste</button>
+            <button type="button" data-q="Best way to travel eco-friendly?">🚌 Travel green</button>
+            <button type="button" data-q="Diet and carbon footprint?">🥗 Food impact</button>
+          </div>
+          <img src="ecoasstant.jpg" alt="Eco assistant" loading="lazy" class="assist-img">
+        </div>
+        <div class="card chat reveal">
+          <div class="chat-head"><img src="logo.png" alt=""><div><b>EcoBot</b><small>● online</small></div></div>
+          <div class="chat-box" id="chatBox"></div>
+          <form id="chatForm" class="chat-form"><input type="text" id="chatInput" placeholder="Type your question…" autocomplete="off" aria-label="Your question"><button class="btn primary" type="submit">Send</button></form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="section alt">
+      <div class="container narrow">
+        <div class="head reveal"><span class="eyebrow">Doubts?</span><h2>Frequently Asked <span class="grad">Questions</span></h2></div>
+        <div class="faq reveal">
+          <details open><summary>What is a carbon footprint?</summary><p>It is the total amount of greenhouse gases, mainly CO₂, produced by your daily activities like travel, electricity use, cooking and food.</p></details>
+          <details><summary>Are the results 100% accurate?</summary><p>No. EcoPulse gives approximate estimates (based on typical India emission factors) to create awareness, not exact scientific measurements.</p></details>
+          <details><summary>Is my data saved anywhere?</summary><p>Your habits, challenge and results are stored only in your own browser (localStorage). Nothing is sent to any server.</p></details>
+          <details><summary>Do I need to create an account?</summary><p>No. There is no login, no sign-up and no cost. Just open the page and start.</p></details>
+          <details><summary>How can I reduce my footprint?</summary><p>Use public transport, save electricity, reduce waste and eat more plant-based meals. Check the Tips and What-if sections above.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <span class="eyebrow">Say hello</span>
+          <h2>Get in <span class="grad">touch</span></h2>
+          <p>Questions or suggestions? I would love to hear from you.</p>
+          <div class="profile"><img src="userprofile.jpg" alt="Developer profile" loading="lazy"><div><b>EcoPulse Developer</b><small>B.Tech CSE Student</small></div></div>
+          <ul class="links">
+            <li>📧 <a href="mailto:youremail@example.com" id="mailLink">youremail@example.com</a></li>
+            <li>💻 <a href="https://github.com/kalpanabachchan213-oss" target="_blank" rel="noopener">github.com/kalpanabachchan213-oss</a></li>
+            <li>🔗 <a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">linkedin.com/in/your-profile</a></li>
+          </ul>
+        </div>
+        <form class="card contact-form reveal" id="contactForm">
+          <label>Your name<input type="text" id="cName" required placeholder="Your name"></label>
+          <label>Your email<input type="email" id="cEmail" required placeholder="you@example.com"></label>
+          <label>Message<textarea id="cMsg" rows="4" required placeholder="Write your message…"></textarea></label>
+          <button class="btn primary" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot">
+      <a href="#home" class="brand"><img src="logo.png" alt=""><span>Eco<b>Pulse</b></span></a>
+      <p>Made with 💚 for a greener planet · EcoPulse © <span id="year"></span></p>
+      <nav><a href="#home">Home</a><a href="#how">How it works</a><a href="#calculator">Calculator</a><a href="#habits">Habits</a><a href="#contact">Contact</a></nav>
+    </div>
+    <p class="disclaimer">Emission values are rough estimates for awareness purposes only.</p>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- Share modal -->
+  <div class="modal" id="shareModal" hidden>
+    <div class="modal-box">
+      <button class="close" id="closeShare" aria-label="Close">✕</button>
+      <h3>Share your eco score</h3>
+      <canvas id="shareCanvas" width="1080" height="1080"></canvas>
+      <div class="btn-row center"><button class="btn primary" id="dlBtn">⬇ Download</button><button class="btn ghost" id="shBtn">📤 Share</button></div>
+    </div>
+  </div>
+</body>
+</html>
